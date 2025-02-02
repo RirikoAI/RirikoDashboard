@@ -1,0 +1,216 @@
+{
+  "pages": {
+    "login": {
+      "title": "Log masuk ke akaun anda",
+      "signin": "Log masuk",
+      "signup": "Daftar",
+      "divider": "atau",
+      "fields": {
+        "email": "Emel",
+        "password": "Kata laluan"
+      },
+      "errors": {
+        "validEmail": "Alamat emel tidak sah"
+      },
+      "buttons": {
+        "submit": "Log masuk",
+        "forgotPassword": "Lupa kata laluan?",
+        "noAccount": "Tiada akaun?",
+        "rememberMe": "Ingat saya"
+      }
+    },
+    "confirmEmail": {
+      "title": "Sahkan emel",
+      "buttons": {
+        "confirming": "Mengesahkan...",
+        "confirm": "Sahkan"
+      }
+    },
+    "forgotPassword": {
+      "title": "Lupa kata laluan?",
+      "fields": {
+        "email": "Emel"
+      },
+      "errors": {
+        "validEmail": "Alamat emel tidak sah"
+      },
+      "buttons": {
+        "submit": "Hantar arahan reset"
+      }
+    },
+    "register": {
+      "title": "Daftar akaun anda",
+      "fields": {
+        "email": "Emel",
+        "password": "Kata laluan"
+      },
+      "errors": {
+        "validEmail": "Alamat emel tidak sah"
+      },
+      "buttons": {
+        "submit": "Daftar",
+        "haveAccount": "Sudah ada akaun?"
+      }
+    },
+    "updatePassword": {
+      "title": "Kemaskini kata laluan",
+      "fields": {
+        "password": "Kata laluan baru",
+        "confirmPassword": "Sahkan kata laluan baru"
+      },
+      "errors": {
+        "confirmPasswordNotMatch": "Kata laluan tidak sepadan"
+      },
+      "buttons": {
+        "submit": "Kemaskini"
+      }
+    },
+    "error": {
+      "info": "Anda mungkin terlupa untuk menambah komponen {{action}} ke sumber {{resource}}.",
+      "404": "Maaf, halaman yang anda lawati tidak wujud.",
+      "resource404": "Adakah anda pasti anda telah mencipta sumber {{resource}}.",
+      "backHome": "Kembali ke halaman utama"
+    }
+  },
+  "actions": {
+    "list": "Senarai",
+    "create": "Cipta",
+    "edit": "Ubah",
+    "show": "Papar"
+  },
+  "buttons": {
+    "create": "Cipta",
+    "save": "Simpan",
+    "logout": "Log keluar",
+    "delete": "Padam",
+    "edit": "Ubah",
+    "cancel": "Batal",
+    "confirm": "Adakah anda pasti?",
+    "filter": "Tapis",
+    "clear": "Kosongkan",
+    "refresh": "Segar",
+    "show": "Papar",
+    "undo": "Batal",
+    "import": "Import",
+    "clone": "Salin",
+    "notAccessTitle": "Anda tidak mempunyai kebenaran untuk mengakses"
+  },
+  "warnWhenUnsavedChanges": "Adakah anda pasti ingin meninggalkan? Anda mempunyai perubahan yang belum disimpan.",
+  "notifications": {
+    "success": "Berjaya",
+    "error": "Ralat (kod status: {{statusCode}})",
+    "undoable": "Anda mempunyai {{seconds}} saat untuk membatalkan",
+    "createSuccess": "{{resource}} berjaya dicipta",
+    "createError": "Terdapat ralat semasa mencipta {{resource}} (kod status: {{statusCode}})",
+    "deleteSuccess": "{{resource}} berjaya dipadam",
+    "deleteError": "Ralat semasa memadam {{resource}} (kod status: {{statusCode}})",
+    "editSuccess": "{{resource}} berjaya diubah",
+    "editError": "Ralat semasa mengubah {{resource}} (kod status: {{statusCode}})",
+    "importProgress": "Import: {{processed}}/{{total}}"
+  },
+  "loading": "Memuatkan",
+  "tags": {
+    "clone": "Salin"
+  },
+  "dashboard": {
+    "title": "Papan pemuka"
+  },
+  "articles": {
+    "articles": "Artikel",
+    "fields": {
+      "id": "ID",
+      "title": "Tajuk",
+      "published": "Diterbitkan",
+      "createdAt": "Dicipta pada",
+      "updatedAt": "Dikemaskini pada",
+      "content": "Kandungan"
+    },
+    "titles": {
+      "create": "Cipta artikel",
+      "edit": "Ubah artikel",
+      "list": "Artikel",
+      "show": "Papar artikel"
+    }
+  },
+  "products": {
+    "products": "Produk",
+    "fields": {
+      "id": "ID",
+      "name": "Nama",
+      "price": "Harga",
+      "category": "Kategori",
+      "stock": "Stok",
+      "published": "Diterbitkan",
+      "createdAt": "Dicipta pada",
+      "updatedAt": "Dikemaskini pada"
+    },
+    "titles": {
+      "create": "Cipta produk",
+      "edit": "Ubah produk",
+      "list": "Produk",
+      "show": "Papar produk"
+    }
+  },
+  "lockers": {
+    "products": "Loker",
+    "fields": {
+      "id": "ID",
+      "name": "Nama",
+      "location": "Lokasi",
+      "booked": "Ditempah",
+      "owner": "Pemilik",
+      "booker": "Penempah",
+      "createdAt": "Dicipta pada",
+      "updatedAt": "Dikemasiki pada"
+    },
+    "titles": {
+      "create": "Cipta loker",
+      "edit": "Ubah loker",
+      "list": "Loker",
+      "show": "Papar loker"
+    }
+  },
+  "users": {
+    "users": "Pengguna",
+    "fields": {
+      "id": "ID",
+      "email": "Emel",
+      "provider": "Pembekal",
+      "username": "Nama pengguna",
+      "firstName": "Nama pertama",
+      "lastName": "Nama terakhir",
+      "createdAt": "Dicipta pada",
+      "updatedAt": "Dikemaskini pada",
+      "status": "Status",
+      "role": "Peranan",
+      "password": "Kata laluan"
+    },
+    "titles": {
+      "create": "Cipta pengguna",
+      "edit": "Ubah pengguna",
+      "list": "Pengguna",
+      "show": "Papar pengguna"
+    }
+  },
+  "documentTitle": {
+    "default": "Papan Kawalan",
+    "suffix": " | Papan Kawalan",
+    "articles": {
+      "list": "Artikel | Papan Kawalan",
+      "show": "#{{id}} Papar artikel | Papan Kawalan",
+      "edit": "#{{id}} Ubah artikel | Papan Kawalan",
+      "create": "Cipta artikel baru | Papan Kawalan",
+      "clone": "#{{id}} Salin artikel | Papan Kawalan"
+    },
+    "users": {
+      "list": "Pengguna | Papan Kawalan",
+      "show": "#{{id}} Papar pengguna | Papan Kawalan",
+      "edit": "#{{id}} Ubah pengguna | Papan Kawalan",
+      "create": "Cipta pengguna baru | Papan Kawalan",
+      "clone": "#{{id}} Salin pengguna | Papan Kawalan"
+    }
+  },
+  "table": {
+    "actions": "Tindakan"
+  }
+}
