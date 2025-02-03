@@ -16,7 +16,7 @@ import {
 } from "@refinedev/antd";
 import { Table, Space } from "antd";
 
-export const UserList: React.FC<IResourceComponentsProps> = () => {
+export const MemberList: React.FC<IResourceComponentsProps> = () => {
     const translate = useTranslate();
     const { tableProps } = useTable({
         syncWithLocation: true,

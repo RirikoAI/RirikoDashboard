@@ -31,7 +31,7 @@ import {
   LayoutProps,
   Divider,
   FormProps,
-  theme,
+  theme, Avatar,
 } from "antd";
 import { DiscordOutlined } from "@ant-design/icons";
 
@@ -53,16 +53,16 @@ type LoginProps = LoginPageProps<LayoutProps, CardProps, FormProps>;
  * @see {@link https://refine.dev/docs/ui-frameworks/antd/components/antd-auth-page/#login} for more details.
  */
 export const LoginPage: React.FC<LoginProps> = ({
-  providers = authProviders,
-  registerLink,
-  forgotPasswordLink,
-  rememberMe,
-  contentProps,
-  wrapperProps,
-  renderContent,
-  formProps,
-  title,
-}) => {
+                                                  providers = authProviders,
+                                                  registerLink,
+                                                  forgotPasswordLink,
+                                                  rememberMe,
+                                                  contentProps,
+                                                  wrapperProps,
+                                                  renderContent,
+                                                  formProps,
+                                                  title,
+                                                }) => {
   const {token} = useToken();
   const [form] = Form.useForm<LoginFormTypes>();
   const translate = useTranslate();
@@ -87,7 +87,8 @@ export const LoginPage: React.FC<LoginProps> = ({
           fontSize: "20px",
         } }
       >
-        { title ?? <ThemedTitle collapsed={ false }/> }
+        <Avatar src="/images/ririko.png" size={ 64 }/>
+        <h1 style={ {color: "#fff", marginTop: 10, marginLeft: 15, fontWeight: 600} }>RIRIKO</h1>
       </div>
     );
   
@@ -269,6 +270,7 @@ export const LoginPage: React.FC<LoginProps> = ({
         align="middle"
         style={ {
           height: "100vh",
+          background: '#000000b5'
         } }
       >
         <Col xs={ 22 }>

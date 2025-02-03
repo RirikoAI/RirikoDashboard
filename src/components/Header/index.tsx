@@ -1,4 +1,4 @@
-import { DownOutlined } from "@ant-design/icons";
+import { DownOutlined, SearchOutlined } from "@ant-design/icons";
 import type { RefineThemedLayoutV2HeaderProps } from "@refinedev/antd";
 import { useGetIdentity, useGetLocale, useSetLocale } from "@refinedev/core";
 import {
@@ -10,7 +10,7 @@ import {
   Space,
   Switch,
   Typography,
-  theme,
+  theme, Input, AutoComplete,
 } from "antd";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -18,7 +18,7 @@ import { ColorModeContext } from "../../contexts/color-mode";
 import { IUser } from "../../interfaces/user.interface";
 import { LANGUAGES } from "../../constants";
 import '../../App.css';
-import { useNavigate } from "react-router-dom"
+import { ServerListDropdown } from "../Servers/ServerListDropdown";
 
 const {Text} = Typography;
 const {useToken} = theme;
@@ -26,7 +26,6 @@ const {useToken} = theme;
 export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
                                                                     sticky,
                                                                   }) => {
-  const navigate = useNavigate()
   const {token} = useToken();
   const {i18n} = useTranslation();
   const locale = useGetLocale();
@@ -72,30 +71,26 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
         // if current page is /dashboard, show the title
         (window.location.pathname === '/dashboard' || window.location.pathname === '/') && (
           <Space style={ {justifyContent: "left", width: "100%"} }>
-            <Avatar src="https://cdn.discordapp.com/avatars/1302015282411470940/c47dce2d0b309c87cc61e452d65b5184.webp"
+            <Avatar src="/images/ririko.png"
                     size={ 40 } style={ {marginTop: -5} }/>
             <Text style={ {fontSize: 20, fontWeight: 700} }>RIRIKO</Text>
           </Space> // else, show the back button
         ) || (
-          <Dropdown
-            menu={ {
-              items: [{
-                key: "back",
-                label: "Back to your servers",
-                onClick: () => navigate("/dashboard"),
-              }],
-              selectedKeys: currentLocale ? [currentLocale] : [],
-            } }
-          >
-            <Button type="text" className={"server-list-button"}>
-              <Space>
-                <Text>Angel's Server</Text>
-                <DownOutlined/>
-              </Space>
-            </Button>
-          </Dropdown>
+          <ServerListDropdown/>
         )
       }
+      <Space>
+        <AutoComplete
+          style={{ width: "100%", maxWidth: "550px", minWidth: "200px", marginLeft: "20px" }}
+          filterOption={false}
+        >
+          <Input
+            size="large"
+            placeholder="Search everything"
+            suffix={<SearchOutlined />}
+          />
+        </AutoComplete>
+      </Space>
       <Space style={ {justifyContent: "right", width: "100%"} }>
         <Dropdown
           menu={ {
@@ -103,7 +98,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
             selectedKeys: currentLocale ? [currentLocale] : [],
           } }
         >
-          <Button type="text" >
+          <Button type="text">
             <Space>
               <Avatar size={ 16 } src={ `/images/flags/${ currentLocale }.svg` }/>
               {  // @ts-ignore

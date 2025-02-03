@@ -37,4 +37,8 @@ p, 1, lockers, (list)|(create)|(edit)|(show)|(delete)
 p, 2, lockers, (list)|(create)|(edit)|(show)|(delete)
 
 p, 3, lockers, (list)|(show)
+
+p, 1, members, (list)|(create)|(edit)|(show)
+p, 2, members, (list)|(create)|(edit)|(show)
+p, 3, members, (list)|(create)|(edit)|(show)
 `);

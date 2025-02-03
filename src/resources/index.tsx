@@ -1,4 +1,5 @@
 import {UserOutlined} from "@ant-design/icons";
+// @ts-ignore
 import {ResourceProps} from "@refinedev/core/src/interfaces/bindings/resource";
 
 export const resources: ResourceProps[] = [
@@ -10,6 +11,16 @@ export const resources: ResourceProps[] = [
     show: "/users/show/:id",
     meta: {
       canDelete: true,
+      icon: <UserOutlined style={{fontSize: '16px', color: '#08c'}}/>,
+    },
+  },
+  {
+    name: "members",
+    list: "/members",
+    create: "/members/create",
+    edit: "/members/edit/:id",
+    show: "/members/show/:id",
+    meta: {
       icon: <UserOutlined style={{fontSize: '16px', color: '#08c'}}/>,
     },
   },

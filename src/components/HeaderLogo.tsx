@@ -27,7 +27,7 @@ const AppLogo: React.FC = () => {
       } }
     >
       <Space style={ {justifyContent: "left", width: "100%"} }>
-        <Avatar src="https://cdn.discordapp.com/avatars/1302015282411470940/c47dce2d0b309c87cc61e452d65b5184.webp"
+        <Avatar src="/images/ririko.png"
                 size={ 40 } style={ {marginTop: -10} }/>
       </Space>
     </ConfigProvider>

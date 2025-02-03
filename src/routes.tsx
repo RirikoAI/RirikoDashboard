@@ -17,12 +17,17 @@ import { LockerCreate, LockerEdit, LockerList, LockerShow } from "./pages/locker
 import { Callback } from "./pages/login/callback";
 import { DashboardPage } from "./pages/dashboard";
 import { ThemedLayout } from "./layout/ThemedLayout";
+import { MemberCreate } from "./pages/members/create";
+import { MemberEdit } from "./pages/members/edit";
+import { MemberShow } from "./pages/members/show";
+import { MemberList } from "./pages/members/list";
 
 export function AppRoutes(): React.ReactElement {
   return (
     <Routes>
       <Route
         element={
+          // @ts-ignore
           <Authenticated fallback={ <CatchAllNavigate to="/login"/> }>
             <ThemedLayout
               Header={ () => <Header sticky/> }
@@ -40,6 +45,7 @@ export function AppRoutes(): React.ReactElement {
       </Route>
       <Route
         element={
+          // @ts-ignore
           <Authenticated fallback={ <CatchAllNavigate to="/login"/> }>
             <ThemedLayoutV2
               Title={ ({collapsed}) => (
@@ -65,6 +71,12 @@ export function AppRoutes(): React.ReactElement {
           <Route path="edit/:id" element={ <UserEdit/> }/>
           <Route path="show/:id" element={ <UserShow/> }/>
         </Route>
+        <Route path="/members">
+          <Route index element={ <MemberList/> }/>
+          <Route path="create" element={ <MemberCreate/> }/>
+          <Route path="edit/:id" element={ <MemberEdit/> }/>
+          <Route path="show/:id" element={ <MemberShow/> }/>
+        </Route>
         <Route path="/articles">
           <Route index element={ <ArticleList/> }/>
           <Route path="create" element={ <ArticleCreate/> }/>
@@ -87,6 +99,7 @@ export function AppRoutes(): React.ReactElement {
       </Route>
       <Route
         element={
+          // @ts-ignore
           <Authenticated fallback={ <Outlet/> }>
             <NavigateToResource/>
           </Authenticated>
