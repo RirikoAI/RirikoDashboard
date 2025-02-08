@@ -23,8 +23,8 @@ export const ServerList: React.FC = () => {
       </div>
     </Col>
     { servers.map((server: any) => {
-      let bannerUrl = (server.banner) ? `url(https://cdn.discordapp.com/banners/${ server.id }/${ server.banner }.png?size=1024)` : 'url(/public/images/discordblue.png)';
-      let iconUrl = (server.icon) ? `https://cdn.discordapp.com/icons/${ server.id }/${ server.icon }.png` : '/public/images/discordblue.png';
+      let bannerUrl = (server.banner) ? `url(https://cdn.discordapp.com/banners/${ server.id }/${ server.banner }.png?size=1024)` : 'url(/images/discordblue.png)';
+      let iconUrl = (server.icon) ? `https://cdn.discordapp.com/icons/${ server.id }/${ server.icon }.png` : '/images/discordblue.png';
       let bannerBlur = (server.banner) ? `` : `banner-image-blur`;
       if (server.icon && !server.banner) bannerUrl = `url(${ iconUrl })`;
       return (
@@ -39,22 +39,28 @@ export const ServerList: React.FC = () => {
               <div className="opener"><span></span><span></span><span></span></div>
             </div>
             <h2 className="name">{ server.name }</h2>
-            <div className="title">{ (server.owner ? 'Owner' : 'Member') }</div>
+            <div
+              className="title">{ (server.owner ? 'Owner' : ((server.can_manage_server) ? 'Admin' : 'Member')) }</div>
             <div className="actions">
               <div className="follow-info">
-                <h2><a href="#"><span>12</span><small>Members</small></a></h2>
+                <h2><a href="#"><span>{ server.approximate_member_count }</span><small>Members</small></a></h2>
                 <h2><a href="#"><span>1000</span><small>Plugins Enabled</small></a></h2>
               </div>
-              <div className="follow-btn">
-                <button onClick={
-                  () => {
-                    setSelectedServer(server)
-                    // navigate to /users
-                    navigate("/users")
-                  }
-                }>Manage Server
-                </button>
-              </div>
+              {
+                (server.owner || server.can_manage_server) && <div className="follow-btn">
+                  <button onClick={
+                    () => {
+                      setSelectedServer(server)
+                      navigate("/dashboard")
+                    }
+                  }>Manage Server
+                  </button>
+                </div>
+                ||
+                <div className="follow-btn">
+                  <button>View Server</button>
+                </div>
+              }
             </div>
             <div className="desc"></div>
           </div>

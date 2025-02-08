@@ -1,7 +1,7 @@
 import { Outlet, Route, Routes } from "react-router-dom";
 import { Authenticated } from "@refinedev/core";
 import { CatchAllNavigate, NavigateToResource } from "@refinedev/react-router-v6";
-import { ErrorComponent, ThemedLayoutV2, ThemedSiderV2, ThemedTitleV2 } from "@refinedev/antd";
+import { ErrorComponent, ThemedSiderV2, ThemedTitleV2 } from "@refinedev/antd";
 import HeaderLogo from "./components/HeaderLogo";
 import { Header } from "./components";
 import { UserCreate, UserEdit, UserList, UserShow } from "./pages/users";
@@ -15,12 +15,14 @@ import { ConfirmEmailPage } from "./pages/confirmEmail/confirmEmail";
 import * as React from "react";
 import { LockerCreate, LockerEdit, LockerList, LockerShow } from "./pages/lockers";
 import { Callback } from "./pages/login/callback";
-import { DashboardPage } from "./pages/dashboard";
+import { ServerListPage } from "./pages/serverList";
 import { ThemedLayout } from "./layout/ThemedLayout";
 import { MemberCreate } from "./pages/members/create";
 import { MemberEdit } from "./pages/members/edit";
 import { MemberShow } from "./pages/members/show";
 import { MemberList } from "./pages/members/list";
+import { ThemedLayoutFull } from "./layout/ThemedLayoutFull";
+import { DashboardPage } from "./pages/dashboard";
 
 export function AppRoutes(): React.ReactElement {
   return (
@@ -39,15 +41,15 @@ export function AppRoutes(): React.ReactElement {
       >
         <Route
           index
-          element={ <DashboardPage/> }
+          element={ <ServerListPage/> }
         />
-        <Route path="/dashboard" element={ <DashboardPage/> }/>
+        <Route path="/server-list" element={ <ServerListPage/> }/>
       </Route>
       <Route
         element={
           // @ts-ignore
           <Authenticated fallback={ <CatchAllNavigate to="/login"/> }>
-            <ThemedLayoutV2
+            <ThemedLayoutFull
               Title={ ({collapsed}) => (
                 <ThemedTitleV2
                   // collapsed is a boolean value that indicates whether the <Sidebar> is collapsed or not
@@ -61,10 +63,11 @@ export function AppRoutes(): React.ReactElement {
               Sider={ (props) => <ThemedSiderV2 { ...props } fixed/> }
             >
               <Outlet/>
-            </ThemedLayoutV2>
+            </ThemedLayoutFull>
           </Authenticated>
         }
       >
+        <Route path="/dashboard" element={ <DashboardPage/> }/>
         <Route path="/users">
           <Route index element={ <UserList/> }/>
           <Route path="create" element={ <UserCreate/> }/>

@@ -1,6 +1,5 @@
-import {UserOutlined} from "@ant-design/icons";
-// @ts-ignore
-import {ResourceProps} from "@refinedev/core/src/interfaces/bindings/resource";
+import { UserOutlined } from "@ant-design/icons";
+import {ResourceProps} from "@refinedev/core";
 
 export const resources: ResourceProps[] = [
   {

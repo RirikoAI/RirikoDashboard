@@ -14,8 +14,7 @@ export const ServerListDropdown: React.FC = () => {
     label: server.name,
     onClick: () => {
       setSelectedServer(server)
-      // navigate to /users
-      navigate("/users")
+      navigate("/dashboard");
     },
   }));
   
@@ -25,7 +24,7 @@ export const ServerListDropdown: React.FC = () => {
         items: [...serverItems, {
           key: "back",
           label: "Back to your servers",
-          onClick: () => navigate("/dashboard"),
+          onClick: () => navigate("/"),
         }],
         selectedKeys: [''],
       } }

@@ -69,7 +69,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
     <AntdLayout.Header style={ headerStyles }>
       {
         // if current page is /dashboard, show the title
-        (window.location.pathname === '/dashboard' || window.location.pathname === '/') && (
+        (window.location.pathname === '/' || window.location.pathname === '/') && (
           <Space style={ {justifyContent: "left", width: "100%"} }>
             <Avatar src="/images/ririko.png"
                     size={ 40 } style={ {marginTop: -5} }/>
