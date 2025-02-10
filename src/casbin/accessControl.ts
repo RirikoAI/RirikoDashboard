@@ -21,21 +21,15 @@ export const adapter = new StringAdapter(`
 p, 1, users, (list)|(create)|(edit)|(show)|(delete)
 
 p, 1, articles, (list)|(create)|(edit)|(show)|(delete)
-
 p, 2, articles, (list)|(create)|(edit)|(show)|(delete)
-
 p, 3, articles, (list)|(show)
 
 p, 1, products, (list)|(create)|(edit)|(show)|(delete)
-
 p, 2, products, (list)|(create)|(edit)|(show)|(delete)
-
 p, 3, products, (list)|(show)
 
 p, 1, lockers, (list)|(create)|(edit)|(show)|(delete)
-
 p, 2, lockers, (list)|(create)|(edit)|(show)|(delete)
-
 p, 3, lockers, (list)|(show)
 
 p, 1, members, (list)|(create)|(edit)|(show)

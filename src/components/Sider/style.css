@@ -30,7 +30,6 @@
             radial-gradient(at 25% 97%, hsla(244,79%,65%,1) 0px, transparent 50%),
             radial-gradient(at 67% 49%, hsla(188,84%,78%,1) 0px, transparent 50%),
             radial-gradient(at 14% 37%, hsla(349,79%,75%,1) 0px, transparent 50%);
-    background-attachment: fixed !important;
 }
 
 
@@ -106,10 +105,53 @@
 /*    height: 100vh;*/
 /*}*/
 
-.light hr {
-    border-color: #ffffff7d;
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .header-search-bar {
+        display: none;
+    }
 }
 
-.dark hr {
-    border-color: #ffffff33;
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .header-search-bar {
+        display: none;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .header-search-bar {
+        display: none;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 1200px) {
+    .header-search-bar {
+        display: inline;
+    }
+
+    .ant-layout.ant-layout-has-sider, .ant-layout-has-sider {
+        padding-left: 50px !important;
+    }
+
+    main.ant-layout-content {
+        padding-right: 50px !important;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 2000px) {
+    .header-search-bar {
+        display: inline;
+    }
+
+    .ant-layout.ant-layout-has-sider, .ant-layout-has-sider {
+        padding-left: 300px !important;
+    }
+
+    main.ant-layout-content {
+        padding-right: 300px !important;
+    }
 }

@@ -25,10 +25,10 @@ export const ThemedLayout: React.FC<RefineThemedLayoutV2Props> = ({
           <HeaderToRender/>
           <AntdLayout.Content>
             <div
+              className={"ant-layout-has-sider"}
               style={ {
                 minHeight: 360,
                 padding: isSmall ? 24 : 12,
-                paddingLeft: 300,
               } }
             >
               { children }

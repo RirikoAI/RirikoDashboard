@@ -4,36 +4,38 @@ import { useDiscordServer } from "../../contexts/discord";
 import { PlayCircleOutlined } from "@ant-design/icons";
 import { LuUsers } from "react-icons/lu";
 import { FaCircle } from "react-icons/fa";
+import { GuildFeature } from "../../components/GuildFeature";
 
 const {Text} = Typography;
 
 export const DashboardPage: React.FC = () => {
-  const { selectedServer } = useDiscordServer();
+  const {selectedServer} = useDiscordServer();
   console.log(selectedServer)
   return (
     <>
-      <h1>Dashboard for {selectedServer.name}</h1>
-      <Row gutter={16}>
-        <Col xl={4} lg={8}  md={12} sm={24} style={{ marginBottom: 16 }}>
-          <Card bordered={false}>
+      <h1>Dashboard for { selectedServer.name }</h1>
+      <Row gutter={ 24 } style={ {marginBottom: 16} }>
+        <Col xl={ 6 } lg={ 12 } md={ 24 } sm={ 24 } style={ {marginBottom: 16} }>
+          <Card bordered={ false }>
             <Statistic
               title="Members"
-              value={selectedServer.approximate_member_count}
-              prefix={<LuUsers  />}
+              value={ selectedServer.approximate_member_count }
+              prefix={ <LuUsers/> }
             />
           </Card>
         </Col>
-        <Col xl={4} lg={8} md={12} sm={24} style={{ marginBottom: 16 }}>
-          <Card bordered={false}>
+        <Col xl={ 6 } lg={ 12 } md={ 24 } sm={ 24 } style={ {marginBottom: 16} }>
+          <Card bordered={ false }>
             <Statistic
               title="Currently Online"
-              value={selectedServer.approximate_presence_count}
-              prefix={<FaCircle  />}
-              valueStyle={{ color: "#3f8600" }}
+              value={ selectedServer.approximate_presence_count }
+              prefix={ <FaCircle/> }
+              valueStyle={ {color: "#3f8600"} }
             />
           </Card>
         </Col>
       </Row>
+      <GuildFeature/>
     </>
   );
 };

@@ -25,6 +25,7 @@ import {
   useWarnAboutChange,
 } from "@refinedev/core";
 
+import ('./style.css');
 import { drawerButtonStyles } from "@refinedev/antd/src/components/themedLayoutV2/sider/styles";
 import { RefineThemedLayoutV2SiderProps } from "@refinedev/antd";
 import { ThemedTitleV2 } from "@refinedev/antd";
@@ -188,8 +189,6 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
     </Menu.Item>
   ) : null;
   
-  console.log(selectedKey, token.colorBgElevated)
-  
   const items = renderTreeView(menuItems, selectedKey);
   
   const renderSider = () => {
@@ -205,7 +204,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
       <>
         <div role="presentation" className="ant-menu-item-group-title" title="Item 1">General</div>
         { dashboard }
-        { (selectedServer.can_manage_server && <>
+        { ((selectedServer.can_manage_server && selectedServer.bot_in_guild) && <>
             <div role="presentation" className="ant-menu-item-group-title" title="Item 1">Plugins</div>
             { items }
           </>

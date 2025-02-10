@@ -47,19 +47,38 @@ export const ServerList: React.FC = () => {
                 <h2><a href="#"><span>1000</span><small>Plugins Enabled</small></a></h2>
               </div>
               {
-                (server.owner || server.can_manage_server) && <div className="follow-btn">
-                  <button onClick={
-                    () => {
-                      setSelectedServer(server)
-                      navigate("/dashboard")
-                    }
-                  }>Manage Server
-                  </button>
-                </div>
-                ||
-                <div className="follow-btn">
-                  <button>View Server</button>
-                </div>
+                (server.owner || server.can_manage_server) && (
+                  (server.bot_in_guild) && (
+                  <div className="btn btn-green">
+                    <button onClick={
+                      () => {
+                        setSelectedServer(server)
+                        navigate("/dashboard")
+                      }
+                    }>Manage Server
+                    </button>
+                  </div>
+                  ) || (
+                    <div className="btn">
+                      <button onClick={
+                        () => {
+                          window.open("http://localhost:3000/v1/discord/invite");
+                        }
+                      }>Invite Bot
+                      </button>
+                    </div>
+                  )
+                ) || (
+                  <div className="btn btn-gray">
+                    <button  title="No permission to manage server. Please ask the owner/admin to give you the manage server permission." onClick={
+                      () => {
+                        setSelectedServer(server)
+                        navigate("/dashboard")
+                      }
+                    }>View Server
+                    </button>
+                  </div>
+                )
               }
             </div>
             <div className="desc"></div>

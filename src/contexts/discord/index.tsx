@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 
 // Define the server type
 interface Server {
+  bot_in_guild: boolean;
   id: number;
   name: string;
   icon: string | null;

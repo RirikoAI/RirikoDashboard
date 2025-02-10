@@ -35,7 +35,6 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
   
   const currentLocale = locale();
   
-  
   const menuItems: MenuProps["items"] = [...(i18n.languages || [])]
     .sort()
     .map((lang: string) => ({
@@ -79,7 +78,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
           <ServerListDropdown/>
         )
       }
-      <Space>
+      <Space className={ "header-search-bar" }>
         <AutoComplete
           style={{ width: "100%", maxWidth: "550px", minWidth: "200px", marginLeft: "20px" }}
           filterOption={false}
