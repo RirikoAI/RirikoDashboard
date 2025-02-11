@@ -4,28 +4,36 @@ import { Grid, Layout as AntdLayout } from "antd";
 import { ThemedHeaderV2 as DefaultHeader } from "@refinedev/antd/src/components/themedLayoutV2/header";
 import { RefineThemedLayoutV2Props } from "@refinedev/antd/src/components/themedLayoutV2/types";
 import { ThemedLayoutContextProvider } from "@refinedev/antd/src/contexts";
+import { useLocation } from "react-router-dom";
+import { getCssSafePath } from "../helpers/path.helper";
 
 export const ThemedLayout: React.FC<RefineThemedLayoutV2Props> = ({
-                                                                      children,
-                                                                      Header,
-                                                                      Footer,
-                                                                      OffLayoutArea,
-                                                                      initialSiderCollapsed,
-                                                                    }) => {
+                                                                    children,
+                                                                    Header,
+                                                                    Footer,
+                                                                    OffLayoutArea,
+                                                                    initialSiderCollapsed,
+                                                                  }) => {
   const breakpoint = Grid.useBreakpoint();
   const HeaderToRender = Header ?? DefaultHeader;
   const isSmall = typeof breakpoint.sm === "undefined" ? true : breakpoint.sm;
+  const location = useLocation();
+  const [page, setPage] = React.useState<string>("");
+  
+  React.useEffect(() => {
+    setPage(getCssSafePath(location.pathname));
+  }, [useLocation().pathname]);
   
   return (
     <ThemedLayoutContextProvider
       initialSiderCollapsed={ initialSiderCollapsed }
     >
       <AntdLayout style={ {minHeight: "100vh"} }>
-        <AntdLayout>
+        <AntdLayout className={ page }>
           <HeaderToRender/>
           <AntdLayout.Content>
             <div
-              className={"ant-layout-has-sider"}
+              className={ "ant-layout-has-sider " }
               style={ {
                 minHeight: 360,
                 padding: isSmall ? 24 : 12,

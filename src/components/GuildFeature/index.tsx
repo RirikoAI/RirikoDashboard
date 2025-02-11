@@ -32,7 +32,7 @@ export const GuildFeature: React.FC = () => {
             <p><Button type="primary">Invite Ririko</Button></p>
           </>
         ) || (
-          <p>You do not have permission to manage plugins in this server.</p>
+          <p>You do not have permission to invite the bot or manage plugins in this server.</p>
         ))
       
       ) }

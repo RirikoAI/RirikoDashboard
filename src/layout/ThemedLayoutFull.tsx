@@ -5,42 +5,52 @@ import { ThemedHeaderV2 as DefaultHeader } from "@refinedev/antd";
 import { RefineThemedLayoutV2Props } from "@refinedev/antd";
 import { ThemedLayoutContextProvider } from "@refinedev/antd";
 import { ThemedSiderV2 as DefaultSider } from "../components/Sider";
+import { getCssSafePath } from "../helpers/path.helper";
+import { useLocation } from "react-router-dom";
 
 // from ThemedLayoutV2 of "@refinedev/antd"
 export const ThemedLayoutFull: React.FC<RefineThemedLayoutV2Props> = ({
-                                                                      children,
-                                                                      Header,
-                                                                      Sider,
-                                                                      Title,
-                                                                      Footer,
-                                                                      OffLayoutArea,
-                                                                      initialSiderCollapsed,
-                                                                    }) => {
+                                                                        children,
+                                                                        Header,
+                                                                        Sider,
+                                                                        Title,
+                                                                        Footer,
+                                                                        OffLayoutArea,
+                                                                        initialSiderCollapsed,
+                                                                      }) => {
   const breakpoint = Grid.useBreakpoint();
   const SiderToRender = DefaultSider;
   const HeaderToRender = Header ?? DefaultHeader;
   const isSmall = typeof breakpoint.sm === "undefined" ? true : breakpoint.sm;
   
+  const location = useLocation();
+  const [page, setPage] = React.useState<string>("");
+  
+  React.useEffect(() => {
+    setPage(getCssSafePath(location.pathname));
+  }, [useLocation().pathname]);
+  
   return (
     <ThemedLayoutContextProvider
-      initialSiderCollapsed={initialSiderCollapsed}
+      initialSiderCollapsed={ initialSiderCollapsed }
     >
-      <AntdLayout style={{ minHeight: "100vh" }}>
-        <SiderToRender Title={Title} />
+      <AntdLayout style={ {minHeight: "100vh"} }
+                  className={ page }>
+        <SiderToRender Title={ Title }/>
         <AntdLayout>
-          <HeaderToRender />
+          <HeaderToRender/>
           <AntdLayout.Content>
             <div
-              style={{
+              style={ {
                 minHeight: 360,
                 padding: isSmall ? 24 : 12,
-              }}
+              } }
             >
-              {children}
+              { children }
             </div>
-            {OffLayoutArea && <OffLayoutArea />}
+            { OffLayoutArea && <OffLayoutArea/> }
           </AntdLayout.Content>
-          {Footer && <Footer />}
+          { Footer && <Footer/> }
         </AntdLayout>
       </AntdLayout>
     </ThemedLayoutContextProvider>

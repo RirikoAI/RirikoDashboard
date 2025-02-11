@@ -1,0 +1,7 @@
+.light .server-list-dropdown .ant-typography {
+    color: #fff;
+}
+
+.light .server-list-dropdown:hover .ant-typography {
+    color: #000;
+}

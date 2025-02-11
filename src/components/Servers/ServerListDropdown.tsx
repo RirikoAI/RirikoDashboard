@@ -4,6 +4,7 @@ import React from "react";
 import { useDiscordServer } from "../../contexts/discord";
 import { useNavigate } from "react-router-dom";
 const {Text} = Typography;
+import './style.css';
 
 export const ServerListDropdown: React.FC = () => {
   const {servers, setSelectedServer, selectedServer} = useDiscordServer();
@@ -28,6 +29,7 @@ export const ServerListDropdown: React.FC = () => {
         }],
         selectedKeys: [''],
       } }
+      className={ "server-list-dropdown" }
     >
       <Button type="text" className={ "server-list-button" }>
         <Space>

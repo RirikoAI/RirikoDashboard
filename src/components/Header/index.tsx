@@ -78,18 +78,20 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
           <ServerListDropdown/>
         )
       }
+      {(window.location.pathname !== '/' || window.location.pathname !== '/') && (
       <Space className={ "header-search-bar" }>
         <AutoComplete
-          style={{ width: "100%", maxWidth: "550px", minWidth: "200px", marginLeft: "20px" }}
-          filterOption={false}
+          style={ {width: "100%", maxWidth: "550px", minWidth: "200px", marginLeft: "20px"} }
+          filterOption={ false }
         >
           <Input
             size="large"
             placeholder="Search everything"
-            suffix={<SearchOutlined />}
+            suffix={ <SearchOutlined/> }
           />
         </AutoComplete>
       </Space>
+      )}
       <Space style={ {justifyContent: "right", width: "100%"} }>
         <Dropdown
           menu={ {

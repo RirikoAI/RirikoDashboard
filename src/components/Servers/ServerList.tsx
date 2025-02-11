@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Col, Row } from "antd";
+import { AutoComplete, Col, Input, Row, Space } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDiscordServer } from "../../contexts/discord";
 import { getDiscordServers } from "../../services";
+import { SearchOutlined } from "@ant-design/icons";
 
 export const ServerList: React.FC = () => {
   const navigate = useNavigate();
@@ -18,8 +19,18 @@ export const ServerList: React.FC = () => {
   
   return (<Row gutter={ [16, 24] }>
     <Col span={ 24 }>
-      <div style={ {textAlign: 'center'} }>
+      <div style={ {textAlign: 'center', marginTop: 24, marginBottom: 24} }>
         <h1>Select a server to manage</h1>
+          <AutoComplete
+            style={ {width: "100%", maxWidth: "550px", minWidth: "200px", marginLeft: "20px"} }
+            filterOption={ false }
+          >
+            <Input
+              size="large"
+              placeholder="Search server"
+              suffix={ <SearchOutlined/> }
+            />
+          </AutoComplete>
       </div>
     </Col>
     { servers.map((server: any) => {
