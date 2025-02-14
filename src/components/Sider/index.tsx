@@ -26,7 +26,6 @@ import {
 } from "@refinedev/core";
 
 import ('./style.css');
-import { drawerButtonStyles } from "@refinedev/antd/src/components/themedLayoutV2/sider/styles";
 import { RefineThemedLayoutV2SiderProps } from "@refinedev/antd";
 import { ThemedTitleV2 } from "@refinedev/antd";
 import { useThemedLayoutContext } from "@refinedev/antd";
@@ -36,6 +35,8 @@ import { useDiscordServer } from "../../contexts/discord";
 const {SubMenu} = Menu;
 const {useToken} = theme;
 
+// from ThemedLayoutV2 of "@refinedev/antd"
+// God bless this code. this is the result of poor choices and bad design
 export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
                                                                           Title: TitleFromProps,
                                                                           render,
@@ -43,7 +44,6 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
                                                                           fixed,
                                                                           activeItemDisabled = false,
                                                                         }) => {
-  
   const {selectedServer} = useDiscordServer();
   
   const {token} = useToken();
@@ -287,7 +287,14 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
           </Layout>
         </Drawer>
         <Button
-          style={ drawerButtonStyles }
+          className={ "mobile-sider-button" }
+          style={ {
+            borderTopLeftRadius: 0,
+            borderBottomLeftRadius: 0,
+            position: "fixed",
+            top: 64,
+            zIndex: 999,
+          } }
           size="large"
           onClick={ () => setMobileSiderOpen(true) }
           icon={ <BarsOutlined/> }

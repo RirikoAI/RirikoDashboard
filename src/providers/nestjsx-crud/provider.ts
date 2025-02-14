@@ -200,7 +200,7 @@ export const dataProvider = (
         httpClient.defaults.headers = {
           ...httpClient.defaults.headers,
           ...headers,
-        };
+        } as any;
       }
       
       let axiosResponse;

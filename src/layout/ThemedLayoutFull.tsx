@@ -4,7 +4,7 @@ import { Grid, Layout as AntdLayout } from "antd";
 import { ThemedHeaderV2 as DefaultHeader } from "@refinedev/antd";
 import { RefineThemedLayoutV2Props } from "@refinedev/antd";
 import { ThemedLayoutContextProvider } from "@refinedev/antd";
-import { ThemedSiderV2 as DefaultSider } from "../components/Sider";
+import { ThemedSiderV2 } from "../components/Sider";
 import { getCssSafePath } from "../helpers/path.helper";
 import { useLocation } from "react-router-dom";
 
@@ -19,7 +19,7 @@ export const ThemedLayoutFull: React.FC<RefineThemedLayoutV2Props> = ({
                                                                         initialSiderCollapsed,
                                                                       }) => {
   const breakpoint = Grid.useBreakpoint();
-  const SiderToRender = DefaultSider;
+  const SiderToRender = ThemedSiderV2;
   const HeaderToRender = Header ?? DefaultHeader;
   const isSmall = typeof breakpoint.sm === "undefined" ? true : breakpoint.sm;
   

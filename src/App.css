@@ -114,6 +114,18 @@
     border-color: #ffffff33;
 }
 
-.root-page {
+ion-content {
+    --background: none !important;
+}
 
+.refresher-pulling .refresh {
+    display: inline-block !important;
+    width: 100vw;
+    text-align: center;
+}
+
+.refresher-ready .refreshing {
+    display: inline-block !important;
+    width: 100vw;
+    text-align: center;
 }

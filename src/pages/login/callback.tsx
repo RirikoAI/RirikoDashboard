@@ -1,11 +1,8 @@
-import AppLogo from "../../components/AppLogo";
-import { LoginPage } from "./login";
 import { useEffect } from "react";
-import { REFRESH_TOKEN_KEY, TOKEN_EXPIRES_AT_KEY, TOKEN_KEY } from "../../constants";
-
+import { APP_URL, REFRESH_TOKEN_KEY, TOKEN_EXPIRES_AT_KEY, TOKEN_KEY } from "../../constants";
 export const Callback = () => {
   useEffect(() => {
-    fetch('http://localhost:3000/v1/auth/getToken', {
+    fetch(`${APP_URL}/v1/auth/getToken`, {
       credentials: 'include',
     }).then(async r => {
       if (r.ok) {

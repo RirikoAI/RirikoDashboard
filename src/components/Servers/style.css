@@ -5,3 +5,11 @@
 .light .server-list-dropdown:hover .ant-typography {
     color: #000;
 }
+
+.server-search {
+    max-width: 250px !important;
+}
+
+[is-app="true"] .server-search {
+    text-align: left;
+}

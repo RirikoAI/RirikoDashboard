@@ -155,3 +155,7 @@
         padding-right: 300px !important;
     }
 }
+
+[is-app="true"] .mobile-sider-button {
+    margin-top: 40vh;
+}

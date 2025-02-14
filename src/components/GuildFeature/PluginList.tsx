@@ -1,4 +1,5 @@
-import { Button, Card, Col, Row, Switch } from "antd";
+import { Button, Card, Col, Row, Switch, Input } from "antd";
+import { CloseCircleOutlined } from "@ant-design/icons";
 import { RiChatAiLine, RiImageCircleAiLine } from "react-icons/ri";
 import { TfiHandOpen } from "react-icons/tfi";
 import { ImExit } from "react-icons/im";
@@ -6,112 +7,93 @@ import { MdOutlineRecordVoiceOver } from "react-icons/md";
 import { PiScanSmileyLight, PiSmileyMelting } from "react-icons/pi";
 import { SlPresent } from "react-icons/sl";
 import { LuTwitch } from "react-icons/lu";
-import React from "react";
+import React, { useState } from "react";
+
+// Plugin categories and their respective plugins
+const pluginCategories = [
+  {
+    category: "Artificial Intelligence",
+    plugins: [
+      { title: "AI Chatbot", description: "Chat with a bot that has its own personality and can learn from your conversations.", icon: <RiChatAiLine />, enabled: true },
+      { title: "Stable Diffusion", description: "Generate images by entering your own prompts.", icon: <RiImageCircleAiLine />, enabled: true }
+    ]
+  },
+  {
+    category: "General Features",
+    plugins: [
+      { title: "Welcome Banner", description: "Automatically sends the welcome banner when a new member joins.", icon: <TfiHandOpen />, enabled: false },
+      { title: "Farewell Banner", description: "Automatically sends the farewell banner when a member leaves.", icon: <ImExit />, enabled: true },
+      { title: "Auto Voice Channel", description: "Creates a voice channel when a member joins a specific voice channel.", icon: <MdOutlineRecordVoiceOver />, enabled: true },
+      { title: "Memes", description: "Generate memes with a simple command.", icon: <PiScanSmileyLight />, enabled: true },
+      { title: "Reactions", description: "Easily generate random reaction GIFs with a simple command.", icon: <PiSmileyMelting />, enabled: true },
+      { title: "Giveaways", description: "Run giveaways and drops in your server.", icon: <SlPresent />, enabled: true }
+    ]
+  },
+  
+  {
+    category: "Moderation",
+    plugins: [
+      { title: "Auto Moderation", description: "Automatically moderate your server with a set of rules.", icon: <RiChatAiLine />, enabled: true },
+      { title: "Anti-Spam", description: "Automatically remove spam messages from your server.", icon: <RiChatAiLine />, enabled: true },
+      { title: "Auto Role", description: "Automatically assign roles to members when they join.", icon: <RiChatAiLine />, enabled: true },
+    ]
+  },
+  {
+    category: "Stream Alerts",
+    plugins: [
+      { title: "Twitch Stream Notification", description: "Subscribe to a Twitch streamer and get notified when they go live.", icon: <LuTwitch />, enabled: true }
+    ]
+  },
+];
 
 export const PluginList: React.FC = () => {
+  const [pluginSearch, setPluginSearch] = useState("");
+  
   return (
     <>
-      <h2>Artificial Intelligence</h2>
-      <Row gutter={ 24 } style={ {marginBottom: 24} }>
-        <Col xl={ 6 } lg={ 12 } md={ 12 } sm={ 24 } xs={ 24 } style={ {marginBottom: 24} }>
-          <Card title="AI Chatbot" extra={ <Switch defaultChecked/> } bordered={ false }>
-            <div className={ "feature-icon" }>
-              <RiChatAiLine/>
-            </div>
-            <p>Chat with a bot that has it's own personality and can learn from your conversations.</p>
-            <Button type="primary" onClick={ () => {
-            } }>Manage</Button>
-          </Card>
-        </Col>
-        <Col xl={ 6 } lg={ 12 } md={ 12 } sm={ 24 } xs={ 24 } style={ {marginBottom: 24} }>
-          <Card title="Stable Diffusion" extra={ <Switch defaultChecked/> } bordered={ false }>
-            <div className={ "feature-icon" }>
-              <RiImageCircleAiLine/>
-            </div>
-            <p>Generate images by entering your own prompts.</p>
-            <Button type="primary" onClick={ () => {
-            } }>Manage</Button>
-          </Card>
-        </Col>
-      </Row>
+      <h2>Search Plugins</h2>
+      <Input
+        placeholder="Search plugins..."
+        value={pluginSearch}
+        onChange={e => setPluginSearch(e.target.value)}
+        style={{ marginBottom: 24, width: "100%", maxWidth: 400 }}
+        suffix={
+          pluginSearch && (
+            <CloseCircleOutlined
+              onClick={() => setPluginSearch("")}
+              style={{ cursor: "pointer", color: "#999" }}
+            />
+          )
+        }
+      />
       
-      <h2>General Features</h2>
-      <Row gutter={ 24 } style={ {marginBottom: 24} }>
-        <Col xl={ 6 } lg={ 12 } md={ 12 } sm={ 24 } xs={ 24 } style={ {marginBottom: 24} }>
-          <Card title="Welcome Banner" extra={ <Switch defaultChecked/> } bordered={ false }>
-            <div className={ "feature-icon" }>
-              <TfiHandOpen/>
-            </div>
-            <p>Automatically sends the welcome banner to a channel when a new member joins the server.</p>
-            <Button type="primary" onClick={ () => {
-            } }>Manage</Button>
-          </Card>
-        </Col>
-        <Col xl={ 6 } lg={ 12 } md={ 12 } sm={ 24 } xs={ 24 } style={ {marginBottom: 24} }>
-          <Card title="Farewell Banner" extra={ <Switch defaultChecked/> } bordered={ false }>
-            <div className={ "feature-icon" }>
-              <ImExit/>
-            </div>
-            <p>Automatically sends the farewell banner to a channel when a member leaves the server.</p>
-            <Button type="primary" onClick={ () => {
-            } }>Manage</Button>
-          </Card>
-        </Col>
-        <Col xl={ 6 } lg={ 12 } md={ 12 } sm={ 24 } xs={ 24 } style={ {marginBottom: 24} }>
-          <Card title="Auto Voice Channel" extra={ <Switch defaultChecked/> } bordered={ false }>
-            <div className={ "feature-icon" }>
-              <MdOutlineRecordVoiceOver/>
-            </div>
-            <p>Automatically creates a voice channel when a member joins a specific voice channel.</p>
-            <Button type="primary" onClick={ () => {
-            } }>Manage</Button>
-          </Card>
-        </Col>
-        <Col xl={ 6 } lg={ 12 } md={ 12 } sm={ 24 } xs={ 24 } style={ {marginBottom: 24} }>
-          <Card title="Memes" extra={ <Switch defaultChecked/> } bordered={ false }>
-            <div className={ "feature-icon" }>
-              <PiScanSmileyLight/>
-            </div>
-            <p>Generate memes with a simple command.</p>
-            <Button type="primary" onClick={ () => {
-            } }>Manage</Button>
-          </Card>
-        </Col>
-        <Col xl={ 6 } lg={ 12 } md={ 12 } sm={ 24 } xs={ 24 } style={ {marginBottom: 24} }>
-          <Card title="Reactions" extra={ <Switch defaultChecked/> } bordered={ false }>
-            <div className={ "feature-icon" }>
-              <PiSmileyMelting/>
-            </div>
-            <p>Easily generate random reaction GIFs with a simple command.</p>
-            <Button type="primary" onClick={ () => {
-            } }>Manage</Button>
-          </Card>
-        </Col>
-        <Col xl={ 6 } lg={ 12 } md={ 12 } sm={ 24 } xs={ 24 } style={ {marginBottom: 24} }>
-          <Card title="Giveaways" extra={ <Switch defaultChecked/> } bordered={ false }>
-            <div className={ "feature-icon" }>
-              <SlPresent style={ {padding: 10} }/>
-            </div>
-            <p>Run giveaways and drops in your server.</p>
-            <Button type="primary" onClick={ () => {
-            } }>Manage</Button>
-          </Card>
-        </Col>
-      </Row>
-      
-      <h2>Stream Alerts</h2>
-      <Row gutter={ 24 } style={ {marginBottom: 24} }>
-        <Col xl={ 6 } lg={ 12 } md={ 12 } sm={ 24 } xs={ 24 } style={ {marginBottom: 24} }>
-          <Card title="Twitch Stream Notification" extra={ <Switch defaultChecked/> } bordered={ false }>
-            <div className={ "feature-icon" }>
-              <LuTwitch/>
-            </div>
-            <p>Subscribe to a Twitch streamer and get notified when they go live.</p>
-            <Button type="primary" onClick={ () => {
-            } }>Manage</Button>
-          </Card>
-        </Col>
-      </Row>
+      {pluginCategories.map((category, categoryIndex) => {
+        // Filter plugins by title or description
+        const filteredPlugins = category.plugins.filter(plugin =>
+          plugin.title.toLowerCase().includes(pluginSearch.toLowerCase()) ||
+          plugin.description.toLowerCase().includes(pluginSearch.toLowerCase())
+        );
+        
+        // Hide empty categories
+        if (filteredPlugins.length === 0) return null;
+        
+        return (
+          <div key={categoryIndex}>
+            <h2>{category.category}</h2>
+            <Row gutter={24}>
+              {filteredPlugins.map((plugin, index) => (
+                <Col key={index} xl={6} lg={12} md={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
+                  <Card title={plugin.title} extra={<Switch defaultChecked={plugin.enabled} />}>
+                    <div className="feature-icon">{plugin.icon}</div>
+                    <p>{plugin.description}</p>
+                    <Button type="primary">Manage</Button>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </div>
+        );
+      })}
     </>
-  )
-}
+  );
+};

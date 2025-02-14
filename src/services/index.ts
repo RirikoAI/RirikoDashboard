@@ -1,11 +1,12 @@
 import { fetchApi } from "./api-service";
 import { authProvider } from "../providers/authProvider";
+import { APP_URL } from "../constants";
 
 export const getDiscordServers = async () => {
   let servers;
   
   try {
-    servers = await fetchApi("http://localhost:3000/v1/discord/guilds");
+    servers = await fetchApi(`${APP_URL}/v1/discord/guilds`);
     return servers.data;
   } catch (e: any) {
     // check if we got error 401 or 403

@@ -20,8 +20,13 @@ import { LANGUAGES } from "../../constants";
 import '../../App.css';
 import { ServerListDropdown } from "../Servers/ServerListDropdown";
 import './style.css';
+import { Capacitor } from "@capacitor/core";
 const {Text} = Typography;
 const {useToken} = theme;
+
+export const isNativeAppOrPWA = async () => {
+  return window.matchMedia('(display-mode: standalone)').matches || Capacitor.isNativePlatform();
+}
 
 export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
                                                                     sticky,
@@ -32,6 +37,10 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
   const changeLanguage = useSetLocale();
   const {data: user} = useGetIdentity<IUser>();
   const {mode, setMode} = useContext(ColorModeContext);
+  
+  isNativeAppOrPWA().then((isApp) => {
+    document.documentElement.setAttribute('is-app', isApp.toString());
+  });
   
   const currentLocale = locale();
   
@@ -69,10 +78,10 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
       {
         // if current page is /dashboard, show the title
         (window.location.pathname === '/' || window.location.pathname === '/') && (
-          <Space style={ {justifyContent: "left", width: "100%"} }>
+          <Space style={ {justifyContent: "left", width: "100%"} } className={"header-logo"}>
             <Avatar src="/images/ririko.png"
                     size={ 40 } style={ {marginTop: -5} }/>
-            <Text style={ {fontSize: 20, fontWeight: 700} }>RIRIKO</Text>
+            <Text style={ {fontSize: 20, fontWeight: 700} } className={"header-logo-text"}>RIRIKO</Text>
           </Space> // else, show the back button
         ) || (
           <ServerListDropdown/>
@@ -93,7 +102,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
       </Space>
       )}
       <Space style={ {justifyContent: "right", width: "100%"} }>
-        <Dropdown
+        <Dropdown  className={ "header-language" }
           menu={ {
             items: menuItems,
             selectedKeys: currentLocale ? [currentLocale] : [],

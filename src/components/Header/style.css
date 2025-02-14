@@ -9,3 +9,16 @@
         display: inline;
     }
 }
+
+[is-app="true"] {
+    margin-top: 30px;
+    background-color: #1f1f1f;
+}
+
+[is-app="true"] .header-language {
+    display: none;
+}
+
+.ant-layout-header {
+    z-index: 1000 !important;
+}

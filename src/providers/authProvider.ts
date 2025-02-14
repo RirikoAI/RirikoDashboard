@@ -1,6 +1,6 @@
 import { AuthBindings } from "@refinedev/core";
 import {message} from "antd";
-import {TOKEN_KEY, REFRESH_TOKEN_KEY, TOKEN_EXPIRES_AT_KEY, API_URL} from "../constants";
+import { TOKEN_KEY, REFRESH_TOKEN_KEY, TOKEN_EXPIRES_AT_KEY, API_URL, APP_URL } from "../constants";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../interfaces/user.interface";
 
@@ -43,7 +43,7 @@ export const authProvider: AuthBindings = {
   login: async ({ providerName, email, password }) => {
     try {
       if (providerName === 'discord') {
-        window.location.href = 'http://localhost:3000/v1/auth/discord/login';
+        window.location.replace(`${APP_URL}/v1/auth/discord/login`);
         return {
           success: true,
           redirectTo: "/",

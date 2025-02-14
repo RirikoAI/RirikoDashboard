@@ -1,0 +1,5 @@
+window.env = {
+  "REACT_APP_BACKEND_DOMAIN": "172.16.20.23",
+  "REACT_APP_BACKEND_SCHEME": "http://",
+  "REACT_APP_BACKEND_PORT": "3000"
+};

@@ -1,4 +1,6 @@
-export const API_URL = "http://localhost:3000/v1"; // API URL (backend)
+import 'dotenv/config';
+export const APP_URL = `${process.env.REACT_APP_BACKEND_SCHEME}${process.env.REACT_APP_BACKEND_DOMAIN}:${process.env.REACT_APP_BACKEND_PORT}`;
+export const API_URL = `${APP_URL}/v1`; // API URL (backend)
 export const TOKEN_KEY = "access-token";
 export const REFRESH_TOKEN_KEY = "refresh-token";
 export const TOKEN_EXPIRES_AT_KEY = "token-expires";

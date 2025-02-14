@@ -1,0 +1,7 @@
+{
+  "name": "Ririko Dashboard",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}

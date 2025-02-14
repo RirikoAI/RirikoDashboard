@@ -1,5 +1,4 @@
 import { Refine } from "@refinedev/core";
-import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import {
   notificationProvider,
 } from "@refinedev/antd";
@@ -34,7 +33,6 @@ function App() {
   
   return (
     <BrowserRouter>
-      <RefineKbarProvider>
         <DiscordServerProvider>
           <ColorModeContextProvider>
             <Refine
@@ -53,13 +51,11 @@ function App() {
             >
               <AppRoutes/>
               
-              <RefineKbar/>
               <UnsavedChangesNotifier/>
               <DocumentTitleHandler/>
             </Refine>
           </ColorModeContextProvider>
         </DiscordServerProvider>
-      </RefineKbarProvider>
     </BrowserRouter>
   );
 }

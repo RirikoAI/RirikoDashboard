@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDiscordServer } from "../../contexts/discord";
 import { getDiscordServers } from "../../services";
 import { SearchOutlined } from "@ant-design/icons";
+import { APP_URL } from "../../constants";
 
 export const ServerList: React.FC = () => {
   const navigate = useNavigate();
@@ -22,8 +23,9 @@ export const ServerList: React.FC = () => {
       <div style={ {textAlign: 'center', marginTop: 24, marginBottom: 24} }>
         <h1>Select a server to manage</h1>
           <AutoComplete
-            style={ {width: "100%", maxWidth: "550px", minWidth: "200px", marginLeft: "20px"} }
+            style={ {width: "100%", maxWidth: "550px", minWidth: "200px"} }
             filterOption={ false }
+            className={ "server-search" }
           >
             <Input
               size="large"
@@ -73,7 +75,7 @@ export const ServerList: React.FC = () => {
                     <div className="btn">
                       <button onClick={
                         () => {
-                          window.open("http://localhost:3000/v1/discord/invite");
+                          window.open(`${APP_URL}/v1/discord/invite`);
                         }
                       }>Invite Bot
                       </button>

@@ -16,7 +16,7 @@ export const DashboardPage: React.FC = () => {
       <h1>Dashboard for { selectedServer.name }</h1>
       <Row gutter={ 24 } style={ {marginBottom: 16} }>
         <Col xl={ 6 } lg={ 12 } md={ 24 } sm={ 24 } style={ {marginBottom: 16} }>
-          <Card bordered={ false }>
+          <Card>
             <Statistic
               title="Members"
               value={ selectedServer.approximate_member_count }
@@ -25,7 +25,7 @@ export const DashboardPage: React.FC = () => {
           </Card>
         </Col>
         <Col xl={ 6 } lg={ 12 } md={ 24 } sm={ 24 } style={ {marginBottom: 16} }>
-          <Card bordered={ false }>
+          <Card>
             <Statistic
               title="Currently Online"
               value={ selectedServer.approximate_presence_count }

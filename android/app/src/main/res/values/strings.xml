@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ririko-dashboard</string>
+    <string name="title_activity_main">ririko-dashboard</string>
+    <string name="package_name">ai.ririko.dashboard</string>
+    <string name="custom_url_scheme">ai.ririko.dashboard</string>
+</resources>

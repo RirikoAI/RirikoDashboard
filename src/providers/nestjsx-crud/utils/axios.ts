@@ -5,7 +5,7 @@ export const axiosInstance = axios.create();
 
 const refreshAxios = axios.create();
 
-axiosInstance.interceptors.request.use(async (request: AxiosRequestConfig) => {
+axiosInstance.interceptors.request.use(async (request: any) => {
 
     const tokenExpiresAt = parseInt(localStorage.getItem(TOKEN_EXPIRES_AT_KEY) || '0', 10);
     const currentTime = Date.now();
