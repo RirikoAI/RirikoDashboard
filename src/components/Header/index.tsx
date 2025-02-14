@@ -19,7 +19,7 @@ import { IUser } from "../../interfaces/user.interface";
 import { LANGUAGES } from "../../constants";
 import '../../App.css';
 import { ServerListDropdown } from "../Servers/ServerListDropdown";
-
+import './style.css';
 const {Text} = Typography;
 const {useToken} = theme;
 
@@ -116,7 +116,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
           defaultChecked={ mode === "dark" }
         />
         <Space style={ {marginLeft: "8px"} } size="middle">
-          { user?.displayName && <Text strong>{ user.displayName }</Text> }
+          <span className={"header-username"}>{ user?.displayName && <Text strong>{ user.displayName }</Text> }</span>
           { user?.avatar && <Avatar src={ user?.avatar } alt={ user?.displayName }/> }
         </Space>
       </Space>
