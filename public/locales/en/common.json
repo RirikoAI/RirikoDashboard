@@ -212,5 +212,11 @@
   },
   "table": {
     "actions": "Actions"
+  },
+  "plugins": {
+    "aichatbot": "AI Chatbot",
+    "stablediffusion": "Stable Diffusion",
+    "welcomebanner": "Welcome Banner",
+    "farewellbanner": "Farewell Banner"
   }
 }

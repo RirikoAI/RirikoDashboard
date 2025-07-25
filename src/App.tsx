@@ -18,7 +18,7 @@ import nestjsxCrudDataProviderCustom from "./providers/nestjsx-crud";
 import { API_URL } from "./constants";
 import { AppRoutes } from "./routes";
 import { resources } from "./resources";
-import { DiscordServerProvider } from "./contexts/discord";
+import { DiscordServerProvider } from "./contexts/discord-server";
 
 function App() {
   const {t, i18n} = useTranslation();

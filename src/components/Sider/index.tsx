@@ -22,7 +22,7 @@ import {
   useRouterType,
   useActiveAuthProvider,
   pickNotDeprecated,
-  useWarnAboutChange,
+  useWarnAboutChange, useGetIdentity,
 } from "@refinedev/core";
 
 import ('./style.css');
@@ -30,7 +30,10 @@ import { RefineThemedLayoutV2SiderProps } from "@refinedev/antd";
 import { ThemedTitleV2 } from "@refinedev/antd";
 import { useThemedLayoutContext } from "@refinedev/antd";
 import { useNavigate } from "react-router-dom";
-import { useDiscordServer } from "../../contexts/discord";
+import { useDiscordServer } from "../../contexts/discord-server";
+import { IUser } from "../../interfaces/user.interface";
+import { PluginsMenu } from "./PluginsMenu";
+import { ServerListSider } from "./ServerListSider";
 
 const {SubMenu} = Menu;
 const {useToken} = theme;
@@ -44,7 +47,8 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
                                                                           fixed,
                                                                           activeItemDisabled = false,
                                                                         }) => {
-  const {selectedServer} = useDiscordServer();
+  const {servers, selectedServer} = useDiscordServer();
+  const {data: user} = useGetIdentity<IUser>();
   
   const {token} = useToken();
   const {
@@ -205,7 +209,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
         <div role="presentation" className="ant-menu-item-group-title" title="Item 1">General</div>
         { dashboard }
         { ((selectedServer.can_manage_server && selectedServer.bot_in_guild) && <>
-            <div role="presentation" className="ant-menu-item-group-title" title="Item 1">Plugins</div>
+            { PluginsMenu(navigate, translate) }
             { items }
           </>
         ) }
@@ -236,7 +240,9 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
           border: "none",
           overflow: "auto",
           height: "calc(100% - 72px)",
+          float: "right",
         } }
+        className={ "sider-menu" }
         onClick={ () => {
           setMobileSiderOpen(false);
         } }
@@ -379,10 +385,13 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
             backgroundColor: token.colorBgElevated,
             fontSize: "14px",
             borderBottom: `1px solid ${ token.colorBorder }`,
+            float: "right",
           } }
         >
           <RenderToTitle collapsed={ siderCollapsed }/>
         </div>
+        
+        { ServerListSider(user) }
         { renderMenu() }
       </Layout.Sider>
     </>

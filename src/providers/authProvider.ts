@@ -1,34 +1,25 @@
 import { AuthBindings } from "@refinedev/core";
-import {message} from "antd";
+import { message } from "antd";
 import { TOKEN_KEY, REFRESH_TOKEN_KEY, TOKEN_EXPIRES_AT_KEY, API_URL, APP_URL } from "../constants";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../interfaces/user.interface";
+import { api } from "../services";
 
 export const authProvider: AuthBindings = {
-  register: async ({ email, password, firstName, lastName }) => {
+  register: async ({email, password, firstName, lastName}) => {
     try {
-      const response = await fetch(`${API_URL}/auth/email/register`, {
+      await api(`${ API_URL }/auth/email/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email: email, password: password, firstName: firstName, lastName: lastName })
+        data: JSON.stringify({email: email, password: password, firstName: firstName, lastName: lastName})
       });
-
-      if (response.ok) {
-        return {
-          success: true,
-          redirectTo: "/login",
-        };
-      } else {
-        return {
-          success: false,
-          error: {
-            name: "LoginError",
-            message: "Invalid username or password",
-          },
-        };
-      }
+      
+      return {
+        success: true,
+        redirectTo: "/login",
+      };
     } catch (error) {
       console.error("Error occurred during login:", error);
       return {
@@ -40,26 +31,24 @@ export const authProvider: AuthBindings = {
       };
     }
   },
-  login: async ({ providerName, email, password }) => {
+  login: async ({providerName, email, password}) => {
     try {
       if (providerName === 'discord') {
-        window.location.replace(`${APP_URL}/v1/auth/discord/login`);
+        window.location.replace(`${ APP_URL }/v1/auth/discord/login`);
         return {
           success: true,
           redirectTo: "/",
         }
       }
       
-      const response = await fetch(`${API_URL}/auth/email/login`, {
+      const data = await api(`${ API_URL }/auth/email/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email: email, password: password })
-      });
-
-      const data = await response.json();
-
+        data: {email: email, password: password}
+      })
+      
       if (data.token) {
         localStorage.setItem(TOKEN_KEY, data.token);
         localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken);
@@ -104,7 +93,7 @@ export const authProvider: AuthBindings = {
         authenticated: true,
       };
     }
-
+    
     return {
       authenticated: false,
       redirectTo: "/login",
@@ -115,9 +104,9 @@ export const authProvider: AuthBindings = {
       id: string;
       name: string;
     }
-
+    
     function extractRoleInfoFromToken(token: string | null): Role | null {
-      if(!token) {
+      if (!token) {
         return null;
       }
       try {
@@ -129,31 +118,28 @@ export const authProvider: AuthBindings = {
         return null;
       }
     }
-
-
+    
     const token = localStorage.getItem(TOKEN_KEY);
     const roleInfo = extractRoleInfoFromToken(token);
     if (roleInfo !== null) {
       return roleInfo.id;
     } else {
       try {
-        const response = await fetch(`${API_URL}/auth/me`, {
+        const data = await api(`${ API_URL }/auth/me`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${ token }`,
           },
         });
-
-        const data = await response.json();
-
+        
         if (data.id) {
           const role: Role = {id: data.role.id, name: data.role.name};
-
-          if(role) {
+          
+          if (role) {
             return role.id;
           }
-
+          
         } else {
           return {
             authenticated: false,
@@ -171,15 +157,13 @@ export const authProvider: AuthBindings = {
   getIdentity: async (): Promise<IUser | any> => {
     try {
       const token = localStorage.getItem(TOKEN_KEY);
-      const response = await fetch(`${API_URL}/auth/me`, {
+      const data = await api(`${ API_URL }/auth/me`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${ token }`,
         },
       });
-
-      const data = await response.json();
       
       if (data.id) {
         return {
@@ -189,7 +173,7 @@ export const authProvider: AuthBindings = {
           displayName: data.displayName,
           avatar: data?.metadata.avatarUrl || "https://i.pravatar.cc/300",
         };
-
+        
       } else {
         return {
           authenticated: false,
@@ -203,31 +187,21 @@ export const authProvider: AuthBindings = {
       };
     }
   },
-  forgotPassword: async ({ email }) => {
+  forgotPassword: async ({email}) => {
     try {
-      const response = await fetch(`${API_URL}/auth/forgot/password`, {
+      await api(`${ API_URL }/auth/forgot/password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email: email })
+        data: JSON.stringify({email: email})
       });
-
-      if (response.ok) {
-        message.success("Email successfully sent");
-        return {
-          success: true,
-          redirectTo: "/login",
-        };
-      } else {
-        return {
-          success: false,
-          error: {
-            name: "PasswordResetError",
-            message: "An error occurred.",
-          },
-        };
-      }
+      
+      message.success("Email successfully sent");
+      return {
+        success: true,
+        redirectTo: "/login",
+      };
     } catch (error) {
       return {
         success: false,
@@ -238,31 +212,21 @@ export const authProvider: AuthBindings = {
       };
     }
   },
-  updatePassword: async ( {id, password} ) => {
+  updatePassword: async ({id, password}) => {
     try {
-      const response = await fetch(`${API_URL}/auth/reset/password`, {
+      const data = await api(`${ API_URL }/auth/reset/password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ password: password, hash: id })
+        data: JSON.stringify({password: password, hash: id})
       });
-
-      if (response.ok) {
-        message.success("Password successfully reset");
-        return {
-          success: true,
-          redirectTo: "/login",
-        };
-      } else {
-        return {
-          success: false,
-          error: {
-            name: "PasswordResetError",
-            message: "An error occurred.",
-          },
-        };
-      }
+      
+      message.success("Password successfully reset");
+      return {
+        success: true,
+        redirectTo: "/login",
+      };
     } catch (error) {
       return {
         success: false,
@@ -274,7 +238,7 @@ export const authProvider: AuthBindings = {
     }
   },
   onError: async (error) => {
-   // console.error(error);
-    return { error };
+    // console.error(error);
+    return {error};
   },
 };

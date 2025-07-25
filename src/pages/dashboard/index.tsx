@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Card, Typography, Statistic } from "antd";
-import { useDiscordServer } from "../../contexts/discord";
+import { useDiscordServer } from "../../contexts/discord-server";
 import { PlayCircleOutlined } from "@ant-design/icons";
 import { LuUsers } from "react-icons/lu";
 import { FaCircle } from "react-icons/fa";
@@ -10,7 +10,6 @@ const {Text} = Typography;
 
 export const DashboardPage: React.FC = () => {
   const {selectedServer} = useDiscordServer();
-  console.log(selectedServer)
   return (
     <>
       <h1>Dashboard for { selectedServer.name }</h1>

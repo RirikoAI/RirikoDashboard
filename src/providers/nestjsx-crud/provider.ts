@@ -10,14 +10,13 @@ import {
 import { RequestQueryBuilder, CondOperator } from "@nestjsx/crud-request";
 import { AxiosInstance } from "axios";
 import { stringify } from "query-string";
-import { getSelectedServer } from "../../contexts/discord";
+import { getSelectedServer } from "../../contexts/discord-server";
 
 export const dataProvider = (
   apiUrl: string,
   httpClient: AxiosInstance = axiosInstance
 ): Required<DataProvider> => {
   const selectedServer = getSelectedServer();
-  console.log(selectedServer)
   return ({
     getList: async ({resource, pagination, filters, sorters, meta}) => {
       const url = `${ apiUrl }/${ resource }`;

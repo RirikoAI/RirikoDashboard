@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AutoComplete, Col, Input, Row, Space } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useDiscordServer } from "../../contexts/discord";
-import { getDiscordServers } from "../../services";
+import { useDiscordServer } from "../../contexts/discord-server";
 import { SearchOutlined } from "@ant-design/icons";
 import { APP_URL } from "../../constants";
+import { getDiscordServers } from "../../services/discord";
 
 export const ServerList: React.FC = () => {
   const navigate = useNavigate();
@@ -14,7 +14,6 @@ export const ServerList: React.FC = () => {
     getDiscordServers()
       .then(data => {
         setServers(data)
-        console.log(data)
       })
   }, [])
   

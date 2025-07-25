@@ -33,6 +33,5 @@ export const handleSort = (
   if (sortBy) {
     query.sortBy(sortBy);
   }
-  console.log("query", query)
   return query;
 };

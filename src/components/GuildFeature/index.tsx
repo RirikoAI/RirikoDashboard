@@ -3,7 +3,7 @@ import React from "react";
 import './style.css';
 import { SearchOutlined } from "@ant-design/icons";
 import { PluginList } from "./PluginList";
-import { useDiscordServer } from "../../contexts/discord";
+import { useDiscordServer } from "../../contexts/discord-server";
 
 export const GuildFeature: React.FC = () => {
   const {selectedServer} = useDiscordServer();

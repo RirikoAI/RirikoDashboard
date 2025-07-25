@@ -61,8 +61,8 @@
     "refine": "refine",
     "ionic:serve": "refine dev",
     "ionic:build": "tsc && refine build",
-    "start:android": "ionic cap run android -l --external",
-    "start:ios": "ionic cap run ios -l --external"
+    "start:android": "tsc && refine build && ionic cap run android -l --external",
+    "start:ios": "tsc && refine build && ionic cap run ios -l --external"
   },
   "browserslist": {
     "production": [

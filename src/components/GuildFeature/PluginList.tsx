@@ -8,46 +8,51 @@ import { PiScanSmileyLight, PiSmileyMelting } from "react-icons/pi";
 import { SlPresent } from "react-icons/sl";
 import { LuTwitch } from "react-icons/lu";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Plugin categories and their respective plugins
-const pluginCategories = [
+export const pluginCategories = [
   {
     category: "Artificial Intelligence",
+    key: "ai",
     plugins: [
-      { title: "AI Chatbot", description: "Chat with a bot that has its own personality and can learn from your conversations.", icon: <RiChatAiLine />, enabled: true },
-      { title: "Stable Diffusion", description: "Generate images by entering your own prompts.", icon: <RiImageCircleAiLine />, enabled: true }
+      { title: "AI Chatbot", key: "aichatbot", description: "Chat with a bot that has its own personality and can learn from your conversations.", icon: <RiChatAiLine />, enabled: true },
+      { title: "Stable Diffusion", key: "stablediffusion", description: "Generate images by entering your own prompts.", icon: <RiImageCircleAiLine />, enabled: true }
     ]
   },
-  {
-    category: "General Features",
-    plugins: [
-      { title: "Welcome Banner", description: "Automatically sends the welcome banner when a new member joins.", icon: <TfiHandOpen />, enabled: false },
-      { title: "Farewell Banner", description: "Automatically sends the farewell banner when a member leaves.", icon: <ImExit />, enabled: true },
-      { title: "Auto Voice Channel", description: "Creates a voice channel when a member joins a specific voice channel.", icon: <MdOutlineRecordVoiceOver />, enabled: true },
-      { title: "Memes", description: "Generate memes with a simple command.", icon: <PiScanSmileyLight />, enabled: true },
-      { title: "Reactions", description: "Easily generate random reaction GIFs with a simple command.", icon: <PiSmileyMelting />, enabled: true },
-      { title: "Giveaways", description: "Run giveaways and drops in your server.", icon: <SlPresent />, enabled: true }
-    ]
-  },
-  
   {
     category: "Moderation",
+    key: "moderation",
     plugins: [
-      { title: "Auto Moderation", description: "Automatically moderate your server with a set of rules.", icon: <RiChatAiLine />, enabled: true },
-      { title: "Anti-Spam", description: "Automatically remove spam messages from your server.", icon: <RiChatAiLine />, enabled: true },
-      { title: "Auto Role", description: "Automatically assign roles to members when they join.", icon: <RiChatAiLine />, enabled: true },
+      { title: "Auto Moderation", key: "automoderation", description: "Automatically moderate your server with a set of rules.", icon: <RiChatAiLine />, enabled: true },
+      { title: "Anti-Spam", key: "antispam", description: "Automatically remove spam messages from your server.", icon: <RiChatAiLine />, enabled: true },
+      { title: "Auto Role", key: "autorole", description: "Automatically assign roles to members when they join.", icon: <RiChatAiLine />, enabled: true },
     ]
   },
   {
     category: "Stream Alerts",
+    key: "streamalerts",
     plugins: [
-      { title: "Twitch Stream Notification", description: "Subscribe to a Twitch streamer and get notified when they go live.", icon: <LuTwitch />, enabled: true }
+      { title: "Twitch Stream Notification", key: "twitchstreamnotification", description: "Subscribe to a Twitch streamer and get notified when they go live.", icon: <LuTwitch />, enabled: true }
+    ]
+  },
+  {
+    category: "General Features",
+    key: "general",
+    plugins: [
+      { title: "Welcome Banner", key: "welcomebanner", description: "Automatically sends the welcome banner when a new member joins.", icon: <TfiHandOpen />, enabled: false },
+      { title: "Farewell Banner", key: "farewellbanner", description: "Automatically sends the farewell banner when a member leaves.", icon: <ImExit />, enabled: true },
+      { title: "Auto Voice Channel", key: "autovoicechannel", description: "Creates a voice channel when a member joins a specific voice channel.", icon: <MdOutlineRecordVoiceOver />, enabled: true },
+      { title: "Memes", key: "memes", description: "Generate memes with a simple command.", icon: <PiScanSmileyLight />, enabled: true },
+      { title: "Reactions", key: "reactions", description: "Easily generate random reaction GIFs with a simple command.", icon: <PiSmileyMelting />, enabled: true },
+      { title: "Giveaways", key: "giveaways", description: "Run giveaways and drops in your server.", icon: <SlPresent />, enabled: true }
     ]
   },
 ];
 
 export const PluginList: React.FC = () => {
   const [pluginSearch, setPluginSearch] = useState("");
+  const navigate = useNavigate();
   
   return (
     <>
@@ -86,7 +91,9 @@ export const PluginList: React.FC = () => {
                   <Card title={plugin.title} extra={<Switch defaultChecked={plugin.enabled} />}>
                     <div className="feature-icon">{plugin.icon}</div>
                     <p>{plugin.description}</p>
-                    <Button type="primary">Manage</Button>
+                    <Button type="primary" onClick={() => {
+                      navigate(`/${category.key}/${plugin.key}`);
+                    }}>Manage</Button>
                   </Card>
                 </Col>
               ))}

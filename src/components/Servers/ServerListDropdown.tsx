@@ -1,7 +1,7 @@
 import { Button, Dropdown, Space, Typography } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import React from "react";
-import { useDiscordServer } from "../../contexts/discord";
+import { useDiscordServer } from "../../contexts/discord-server";
 import { useNavigate } from "react-router-dom";
 const {Text} = Typography;
 import './style.css';
