@@ -19,20 +19,22 @@ import { API_URL } from "./constants";
 import { AppRoutes } from "./routes";
 import { resources } from "./resources";
 import { DiscordServerProvider } from "./contexts/discord-server";
+import { BackendConfigProvider } from "./contexts/backend-config";
 
 function App() {
   const {t, i18n} = useTranslation();
-  
+
   const dataProvider = nestjsxCrudDataProviderCustom(API_URL);
-  
+
   const i18nProvider = {
     translate: (key: string, params: object) => t(key, params),
     changeLocale: (lang: string) => i18n.changeLanguage(lang),
     getLocale: () => i18n.language,
   };
-  
+
   return (
     <BrowserRouter>
+      <BackendConfigProvider>
         <DiscordServerProvider>
           <ColorModeContextProvider>
             <Refine
@@ -50,12 +52,13 @@ function App() {
               } }
             >
               <AppRoutes/>
-              
+
               <UnsavedChangesNotifier/>
               <DocumentTitleHandler/>
             </Refine>
           </ColorModeContextProvider>
         </DiscordServerProvider>
+      </BackendConfigProvider>
     </BrowserRouter>
   );
 }

@@ -1,40 +1,82 @@
-import React, { useState, useEffect, useContext } from "react";
-import { AutoComplete, Col, Input, Row, Space } from "antd";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import { AutoComplete, Col, Input, Row, Space, Switch } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDiscordServer } from "../../contexts/discord-server";
-import { SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { APP_URL } from "../../constants";
 import { getDiscordServers } from "../../services/discord";
 
 export const ServerList: React.FC = () => {
   const navigate = useNavigate();
-  const {servers, setServers, selectedServer, setSelectedServer} = useDiscordServer();
-  
+  const {servers, setServers, selectedServer, setSelectedServer, showOnlyAccessible, setShowOnlyAccessible} = useDiscordServer();
+  const [serverSearch, setServerSearch] = useState("");
+  const inputRef = useRef<any>(null);
+
   useEffect(() => {
     getDiscordServers()
       .then(data => {
         setServers(data)
       })
   }, [])
-  
+
+  // Maintain focus on the input field when search is active
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [serverSearch]);
+
   return (<Row gutter={ [16, 24] }>
     <Col span={ 24 }>
       <div style={ {textAlign: 'center', marginTop: 24, marginBottom: 24} }>
         <h1>Select a server to manage</h1>
-          <AutoComplete
-            style={ {width: "100%", maxWidth: "550px", minWidth: "200px"} }
-            filterOption={ false }
-            className={ "server-search" }
-          >
-            <Input
-              size="large"
-              placeholder="Search server"
-              suffix={ <SearchOutlined/> }
+        <AutoComplete
+          style={ {width: "100%", maxWidth: "550px", minWidth: "200px"} }
+          filterOption={ false }
+          className={ "server-search" }
+        >
+          <Input
+            ref={inputRef}
+            size="large"
+            placeholder="Search server"
+            value={serverSearch}
+            onChange={e => setServerSearch(e.target.value)}
+            suffix={
+              serverSearch ? (
+                <CloseCircleOutlined
+                  onClick={() => {
+                    setServerSearch("");
+                    // Ensure focus is maintained after clearing
+                    setTimeout(() => inputRef.current?.focus(), 0);
+                  }}
+                  style={{ cursor: "pointer", color: "#999" }}
+                />
+              ) : (
+                <SearchOutlined />
+              )
+            }
+          />
+        </AutoComplete>
+        <div style={{ marginTop: 16 }}>
+          <Space>
+            <span>Show only servers I can manage</span>
+            <Switch 
+              checked={showOnlyAccessible} 
+              onChange={setShowOnlyAccessible} 
             />
-          </AutoComplete>
+          </Space>
+        </div>
       </div>
     </Col>
-    { servers.map((server: any) => {
+    { servers
+      .filter((server: any) => 
+        // Filter by accessibility
+        (!showOnlyAccessible || server.owner || server.can_manage_server) &&
+        // Filter by search term
+        (serverSearch === "" || 
+         server.name.toLowerCase().includes(serverSearch.toLowerCase()))
+      )
+      .map((server: any) => {
       let bannerUrl = (server.banner) ? `url(https://cdn.discordapp.com/banners/${ server.id }/${ server.banner }.png?size=1024)` : 'url(/images/discordblue.png)';
       let iconUrl = (server.icon) ? `https://cdn.discordapp.com/icons/${ server.id }/${ server.icon }.png` : '/images/discordblue.png';
       let bannerBlur = (server.banner) ? `` : `banner-image-blur`;
@@ -61,20 +103,20 @@ export const ServerList: React.FC = () => {
               {
                 (server.owner || server.can_manage_server) && (
                   (server.bot_in_guild) && (
-                  <div className="btn btn-green">
-                    <button onClick={
-                      () => {
-                        setSelectedServer(server)
-                        navigate("/dashboard")
-                      }
-                    }>Manage Server
-                    </button>
-                  </div>
+                    <div className="btn btn-green">
+                      <button onClick={
+                        () => {
+                          setSelectedServer(server)
+                          navigate("/dashboard")
+                        }
+                      }>Manage Server
+                      </button>
+                    </div>
                   ) || (
                     <div className="btn">
                       <button onClick={
                         () => {
-                          window.open(`${APP_URL}/v1/discord/invite`);
+                          window.open(`${ APP_URL }/v1/discord/invite`);
                         }
                       }>Invite Bot
                       </button>
@@ -82,12 +124,14 @@ export const ServerList: React.FC = () => {
                   )
                 ) || (
                   <div className="btn btn-gray">
-                    <button  title="No permission to manage server. Please ask the owner/admin to give you the manage server permission." onClick={
-                      () => {
-                        setSelectedServer(server)
-                        navigate("/dashboard")
-                      }
-                    }>View Server
+                    <button
+                      title="No permission to manage server. Please ask the owner/admin to give you the manage server permission."
+                      onClick={
+                        () => {
+                          setSelectedServer(server)
+                          navigate("/dashboard")
+                        }
+                      }>View Server
                     </button>
                   </div>
                 )

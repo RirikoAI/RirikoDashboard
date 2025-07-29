@@ -161,8 +161,7 @@
 }
 
 .server-list {
-    width: 29%;
-    display: block;
+    /*display: block;*/
     height: calc(100% - 72px);
     float: left;
 }

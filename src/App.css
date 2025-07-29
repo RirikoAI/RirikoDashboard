@@ -133,3 +133,40 @@ ion-content {
 ion-content > .ant-layout-content {
     min-height: 100%;
 }
+
+/* Sidebar Scroll */
+.server-list {
+    /*overflow-y: auto !important;*/
+    height: 100vh !important;
+}
+
+.server-list-scroll {
+    margin-left: 10px;
+}
+
+.server-list-container {
+    float: left;
+    overflow-y: auto;
+    display: inline;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox, Safari 18.2+, Chromium 121+ */
+}
+
+/* Main content scroll */
+.ant-layout {
+    max-height: 100vh !important;
+}
+
+.ant-layout-content {
+    overflow-y: auto !important;
+    height: 100vh !important;
+}
+
+.body {
+    overflow: hidden !important;
+    max-height: 100vh !important;
+}
+
+.ant-drawer .ant-menu {
+    float: none !important;
+}

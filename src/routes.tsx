@@ -23,6 +23,7 @@ import { MemberShow } from "./pages/members/show";
 import { MemberList } from "./pages/members/list";
 import { ThemedLayoutFull } from "./layout/ThemedLayoutFull";
 import { DashboardPage } from "./pages/dashboard";
+import { SetupPage } from "./pages/setup";
 
 export function AppRoutes(): React.ReactElement {
   return (
@@ -114,6 +115,7 @@ export function AppRoutes(): React.ReactElement {
         <Route path="/forgot-password" element={ <ForgotPassword/> }/>
         <Route path="/password-change/:id" element={ <UpdatePasswordPage/> }/>
         <Route path="/confirm-email/:id" element={ <ConfirmEmailPage/> }/>
+        <Route path="/setup" element={ <SetupPage/> }/>
       </Route>
     </Routes>
   )

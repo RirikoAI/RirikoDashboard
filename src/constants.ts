@@ -1,5 +1,8 @@
 import 'dotenv/config';
-export const APP_URL = `${process.env.REACT_APP_BACKEND_SCHEME}${process.env.REACT_APP_BACKEND_DOMAIN}:${process.env.REACT_APP_BACKEND_PORT}`;
+import { getBackendUrl } from './helpers/ip.helper';
+
+// Use the backend URL from local storage or fallback to environment variables
+export const APP_URL = getBackendUrl();
 export const API_URL = `${APP_URL}/v1`; // API URL (backend)
 export const TOKEN_KEY = "access-token";
 export const REFRESH_TOKEN_KEY = "refresh-token";

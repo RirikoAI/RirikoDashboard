@@ -22,6 +22,8 @@ interface DiscordServerContextType {
   setServers: React.Dispatch<React.SetStateAction<Server[]>>;
   selectedServer: Server;
   setSelectedServer: React.Dispatch<React.SetStateAction<Server>>;
+  showOnlyAccessible: boolean;
+  setShowOnlyAccessible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // Create the context
@@ -37,24 +39,41 @@ export const DiscordServerProvider: React.FC<{ children: ReactNode }> = ({ child
       { id: 2, name: "Server Two" },
     ];
   });
-  
+
   const [selectedServer, setSelectedServer] = useState<Server>(() => {
     const savedServer = localStorage.getItem("selectedServer");
     return savedServer ? JSON.parse(savedServer) : null;
   });
-  
+
+  const [showOnlyAccessible, setShowOnlyAccessible] = useState<boolean>(() => {
+    const savedShowOnlyAccessible = localStorage.getItem("showOnlyAccessible");
+    return savedShowOnlyAccessible ? JSON.parse(savedShowOnlyAccessible) : false;
+  });
+
   // Save servers to localStorage when they change
   useEffect(() => {
     localStorage.setItem("servers", JSON.stringify(servers));
   }, [servers]);
-  
+
   // Save selected server to localStorage when it changes
   useEffect(() => {
     localStorage.setItem("selectedServer", JSON.stringify(selectedServer));
   }, [selectedServer]);
-  
+
+  // Save showOnlyAccessible to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem("showOnlyAccessible", JSON.stringify(showOnlyAccessible));
+  }, [showOnlyAccessible]);
+
   return (
-    <DiscordServerContext.Provider value={{ servers, setServers, selectedServer, setSelectedServer }}>
+    <DiscordServerContext.Provider value={{ 
+      servers, 
+      setServers, 
+      selectedServer, 
+      setSelectedServer,
+      showOnlyAccessible,
+      setShowOnlyAccessible
+    }}>
       {children}
     </DiscordServerContext.Provider>
   );
