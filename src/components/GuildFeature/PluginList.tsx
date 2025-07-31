@@ -129,7 +129,7 @@ export const PluginList: React.FC = () => {
 
   // Maintain focus on the input field when search is active
   useEffect(() => {
-    if (inputRef.current) {
+    if (inputRef.current && pluginSearch !== "") {
       inputRef.current.focus();
     }
   }, [pluginSearch]);
