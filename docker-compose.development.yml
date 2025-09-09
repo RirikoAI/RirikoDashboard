@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  ririko-bot-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: ririkoai/ririkobot-dashboard-development
+    container_name: ririko-bot-dashboard
+    ports:
+      - "8100:8100"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+      - ./config:/app/config
+    environment:
+      - NODE_ENV=development
+
+  ririko-bot-backend:
+    image: ririkoai/ririkobot-development
+    container_name: ririko-bot
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+    volumes:
+      - ./config:/app/config
+    ports:
+     - "3000:3000"

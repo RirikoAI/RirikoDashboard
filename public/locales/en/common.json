@@ -193,21 +193,21 @@
     }
   },
   "documentTitle": {
-    "default": "Control Panel",
-    "suffix": " | Control Panel",
+    "default": "Ririko Ai | Dashboard",
+    "suffix": " | Dashboard",
     "articles": {
-      "list": "Articles | Control Panel",
-      "show": "#{{id}} Show article | Control Panel",
-      "edit": "#{{id}} Edit article | Control Panel",
-      "create": "Create new article | Control Panel",
-      "clone": "#{{id}} Clone article | Control Panel"
+      "list": "Articles | Dashboard",
+      "show": "#{{id}} Show article | Dashboard",
+      "edit": "#{{id}} Edit article | Dashboard",
+      "create": "Create new article | Dashboard",
+      "clone": "#{{id}} Clone article | Dashboard"
     },
     "users": {
-      "list": "Users | Control Panel",
-      "show": "#{{id}} Show user | Control Panel",
-      "edit": "#{{id}} Edit user | Control Panel",
-      "create": "Create new user | Control Panel",
-      "clone": "#{{id}} Clone user | Control Panel"
+      "list": "Users | Dashboard",
+      "show": "#{{id}} Show user | Dashboard",
+      "edit": "#{{id}} Edit user | Dashboard",
+      "create": "Create new user | Dashboard",
+      "clone": "#{{id}} Clone user | Dashboard"
     }
   },
   "table": {
